@@ -11,5 +11,9 @@ public class ArrayExample {
         for (int i = 0; i < days.length; i++) {
             System.out.println(days[i] + "day");
         }
+
+        for (String day : days) {
+            System.out.println(day + "day");
+        }
     }
 }
