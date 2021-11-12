@@ -8,10 +8,7 @@ public class Calendar {
     public static final int[] leapDays = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
     public boolean isLeapYear(int year) {
-        if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)) {
-            return true;
-        }
-        return false;
+        return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
     }
 
     public int firstDay(int year, int month) {

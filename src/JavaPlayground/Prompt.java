@@ -4,27 +4,57 @@ import java.util.Scanner;
 
 public class Prompt {
 
-    public void runPrompt() {
-        Scanner s = new Scanner(System.in);
-        Calendar cal = new Calendar();
+    public Scanner s = new Scanner(System.in);
+    public Calendar cal = new Calendar();
+    public Planner plan = new Planner();
 
+    private void runPrompt() {
+        printHelp();
         while (true) {
-            System.out.println("년도을 입력하세요.");
-            System.out.print("YEAR> ");
-            int year = s.nextInt();
 
-            if (year == -1) {
+            System.out.println("명령 (1, 2, 3, h, q)");
+            System.out.print("> ");
+            String cmd = s.next();
+
+            if (cmd.equals("1")) {
+                plan.registerCmd();
+            } else if (cmd.equals("2")) {
+                plan.searchCmd();
+            } else if (cmd.equals("3")) {
+                printCal();
+            } else if (cmd.equals("h")) {
+                printHelp();
+            } else if (cmd.equals("q")) {
                 System.out.println("Have a nice day!");
                 break;
             }
-
-            System.out.println("월을 입력하세요.");
-            System.out.print("MONTH> ");
-            int month = s.nextInt();
-
-            cal.printCalendar(year, month);
         }
-        s.close();
+    }
+
+    public void printHelp() {
+        System.out.println("+----------------------+");
+        System.out.println("| 1. 일정 등록");
+        System.out.println("| 2. 일정 검색");
+        System.out.println("| 3. 달력 보기");
+        System.out.println("| h. 도움말 q. 종료");
+        System.out.println("+----------------------+");
+    }
+
+    public void printCal() {
+        System.out.println("년도을 입력하세요.");
+        System.out.print("YEAR> ");
+        int year = s.nextInt();
+
+        if (year == -1) {
+            System.out.println("Have a nice day!");
+            return;
+        }
+
+        System.out.println("월을 입력하세요.");
+        System.out.print("MONTH> ");
+        int month = s.nextInt();
+
+        cal.printCalendar(year, month);
     }
 
     public static void main(String[] args) {
