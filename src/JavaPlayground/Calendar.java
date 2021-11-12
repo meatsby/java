@@ -1,8 +1,5 @@
 package JavaPlayground;
 
-import java.util.Arrays;
-import java.util.Scanner;
-
 public class Calendar {
     public static final int[] days = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     public static final int[] leapDays = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};

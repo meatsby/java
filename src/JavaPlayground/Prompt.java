@@ -10,34 +10,31 @@ public class Prompt {
 
     private void runPrompt() {
         printHelp();
+        label:
         while (true) {
 
             System.out.println("명령 (1, 2, 3, h, q)");
             System.out.print("> ");
             String cmd = s.next();
 
-            if (cmd.equals("1")) {
-                plan.registerCmd();
-            } else if (cmd.equals("2")) {
-                plan.searchCmd();
-            } else if (cmd.equals("3")) {
-                printCal();
-            } else if (cmd.equals("h")) {
-                printHelp();
-            } else if (cmd.equals("q")) {
-                System.out.println("Have a nice day!");
-                break;
+            switch (cmd) {
+                case "1":
+                    plan.registerCmd();
+                    break;
+                case "2":
+                    plan.searchCmd();
+                    break;
+                case "3":
+                    printCal();
+                    break;
+                case "h":
+                    printHelp();
+                    break;
+                case "q":
+                    System.out.println("Have a nice day!");
+                    break label;
             }
         }
-    }
-
-    public void printHelp() {
-        System.out.println("+----------------------+");
-        System.out.println("| 1. 일정 등록");
-        System.out.println("| 2. 일정 검색");
-        System.out.println("| 3. 달력 보기");
-        System.out.println("| h. 도움말 q. 종료");
-        System.out.println("+----------------------+");
     }
 
     public void printCal() {
@@ -55,6 +52,15 @@ public class Prompt {
         int month = s.nextInt();
 
         cal.printCalendar(year, month);
+    }
+
+    public void printHelp() {
+        System.out.println("+----------------------+");
+        System.out.println("| 1. 일정 등록");
+        System.out.println("| 2. 일정 검색");
+        System.out.println("| 3. 달력 보기");
+        System.out.println("| h. 도움말 q. 종료");
+        System.out.println("+----------------------+");
     }
 
     public static void main(String[] args) {
