@@ -23,12 +23,12 @@ public class BaseBall {
     }
 
     public void init() {
-        randNum = makeRandNum(DIGIT_NUM);
+        randNum = makeRandNum();
     }
 
-    // 유저가 입력한 수와 난수가 같을 때까지 반복함.
+    // prompt 게임진행
     public void playGame() {
-        String result = "";
+        String result;
 
         do {
             System.out.print(SystemMessage.INPUT_MESSAGE);
@@ -38,7 +38,7 @@ public class BaseBall {
         } while (!result.equals(SystemMessage.GAME_CLEAR_MESSAGE));
     }
 
-    // 유저가 입력한 수에 따라 볼과 스트라이크를 판단하고 힌트를 제공함.
+    // prompt 사용자 입력
     private String umpire() {
         int ballNum = 0;
         int strikeNum = 0;
@@ -55,7 +55,7 @@ public class BaseBall {
         return getHint(ballNum, strikeNum);
     }
 
-    // umpire에서 구한 볼과 스트라이크 개수에 따라 구체적인 힌트를 반환함.
+    // logic 힌트제공
     private String getHint(final int ballNum, final int strikeNum) {
         if (strikeNum == DIGIT_NUM) {
             return SystemMessage.GAME_CLEAR_MESSAGE;
@@ -69,6 +69,8 @@ public class BaseBall {
         return ballNum + SystemMessage.BALL + " " + strikeNum + SystemMessage.STRIKE;
     }
 
+    // logic 힌트검사(?)
+    // strike 랑 ball 을 합치는 방향으로 구현했으면 좋았을 듯
     private boolean isStrike(final char digit, final int pos) {
         for (int i = 0; i < DIGIT_NUM; i++) {
             if (digit == randNum.charAt(i) && pos == i) {
@@ -77,7 +79,6 @@ public class BaseBall {
         }
         return false;
     }
-
     private boolean isBall(final char digit) {
         for (int i = 0; i < DIGIT_NUM; i++) {
             if (digit == randNum.charAt(i)) {
@@ -87,18 +88,18 @@ public class BaseBall {
         return false;
     }
 
-    // 1에서 9까지 서로 다른 임의의 세 자리 난수를 생성함.
-    private String makeRandNum(final int digit) {
+    // logic 난수 생성
+    private String makeRandNum() {
         Set<Character> randNumSet = new HashSet<>();
         int cnt = 0;
-        String result = "";
+        StringBuilder result = new StringBuilder();
 
-        while (cnt < digit) {
+        while (cnt < BaseBall.DIGIT_NUM) {
             // (1~9) 까지의 10진수 숫자 중 하나를 char 타입으로 temp 에 저장
             char temp = Character.forDigit(RandomUtils.nextInt(1, 9), RADIX);
 
             // randNumSet 에 temp 가 이미 있다면 다시
-            // Q. 왜 굳이 Set을 사용? List도 가능하지 않았을까?
+            // Q. 왜 굳이 Set 을 사용? List 도 가능하지 않았을까?
             if (randNumSet.contains(temp)) {
                 continue;
             }
@@ -106,14 +107,14 @@ public class BaseBall {
             // randNumSet 에 temp 추가
             randNumSet.add(temp);
             // result 문자열에 추가
-            result += temp;
+            result.append(temp);
             cnt++;
         }
         // 이렇게 되면 중복되지않는 숫자로 이루어진 임의의 3자리 수가 result 문자열로 반환됨
-        return result;
+        return result.toString();
     }
 
-    // 게임이 끝났을 때, 유저에게 게임 재시작 여부를 물어 봄.
+    // prompt 재시작 여부
     public boolean isUserWantContinue() {
         System.out.println(SystemMessage.GAME_RESTART_OR_END_MESSAGE);
         String sel = scanner.next();
@@ -126,7 +127,9 @@ public class BaseBall {
         throw new IllegalArgumentException();
     }
 
-    // 유저가 입력한 세 자리 수에 대해 입력 검사를 함.
+    // exceptions 예외처리
+    // 2번째랑 3번째가 같은지는 검사를 안함
+    // 2중 for 문으로 검사 가능할 듯?
     private String next() {
         String input = scanner.next();
 
