@@ -1,13 +1,9 @@
-package Precourse1.baseball;
-
-import java.util.*;
+package baseball;
 
 public class Application {
     public static void main(String[] args) {
-        final Scanner scanner = new Scanner(System.in);
-
-        Prompt p = new Prompt(scanner);
-        p.play();
-        scanner.close();
+        //TODO: 숫자 야구 게임 구현
+        baseball.Game game = new baseball.Game();
+        game.startGame();
     }
 }
