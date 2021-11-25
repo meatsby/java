@@ -29,6 +29,7 @@
 //            userNum = Console.readLine();
 //            isValidInput();
 //            String result = compareNumbs();
+//            System.out.println(result);
 //            if (result.equals("3스트라이크")) {
 //                System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
 //                return;
@@ -90,9 +91,7 @@
 //            parseNum(i, randNum.charAt(i));
 //        }
 //
-//        String hint = getHint();
-//        System.out.println(hint);
-//        return hint;
+//        return getHint();
 //    }
 //
 //    private void parseNum(int i, char curNum) {
