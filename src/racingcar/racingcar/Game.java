@@ -1,10 +1,7 @@
 package racingcar.racingcar;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
-import racingcar.utils.RandomUtils;
 
 public class Game {
     // 자동차 이름 입력
@@ -14,7 +11,7 @@ public class Game {
     // move or stop
     // 현재 상황 출력
 
-    private Scanner scanner;
+    private final Scanner scanner;
 
     public Game(Scanner scanner) {
         this.scanner = scanner;
