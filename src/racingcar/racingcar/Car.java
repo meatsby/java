@@ -12,8 +12,7 @@ public class Car {
 
     // 추가 기능 구현
     public void move() {
-        int r = RandomUtils.nextInt(0, 9);
-        if (r >= 4) {
+        if (RandomUtils.nextInt(0, 9) >= 4) {
             position++;
         }
     }
