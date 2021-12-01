@@ -1,4 +1,4 @@
-package racingcar.racingcar;
+package racingcarTut.racingcar;
 
 public class LessThanOneException extends RuntimeException {
     public LessThanOneException() {
