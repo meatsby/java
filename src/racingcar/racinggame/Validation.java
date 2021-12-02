@@ -5,66 +5,74 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 public class Validation {
-	private static final String ERROR = "[ERROR] ";
+	private static final String ERROR_MESSAGE = "[ERROR] ";
+	private static final String BLANK_NAME_ERROR = "자동차 이름은 빈칸일 수 없습니다.";
+	private static final String DUPLICATE_NAME_ERROR = "자동차 이름은 중복될 수 없습니다.";
+	private static final String LONG_NAME_ERROR = "자동차 이름은 5자 이하여야 합니다.";
+	private static final String SHORT_NAME_ERROR = "자동차 이름은 1자 이상이어야 합니다.";
+	private static final String CONTAINS_BLANK_ERROR = "자동차 이름에 공백이 포함될 수 없습니다.";
 
-	public static void isValid(String[] carNames) {
+	private static final String NOT_DIGIT_ERROR = "라운드 횟수는 정수여야 합니다.";
+	private static final String NOT_POSITIVE_ERROR = "라운드 횟수는 1 이상이어야 합니다.";
+
+	public void isValid(String[] carNames) {
 		isEmpty(carNames);
 		isUnique(carNames);
 		for (String carName : carNames) {
-			isLong(carName);
-			isShort(carName);
+			tooLong(carName);
+			tooShort(carName);
 			hasBlank(carName);
 		}
 	}
 
-	public static void isValid(String round) {
+	public void isValid(String round) {
 		for (int i = 0; i < round.length(); i++) {
 			notDigit(round, i);
 		}
 		lessThanOne(round);
 	}
 
-	private static void isEmpty(String[] carNames) {
+	private void isEmpty(String[] carNames) {
 		if (carNames.length < 1) {
-			throw new IllegalArgumentException(ERROR + "자동차 이름은 빈칸일 수 없습니다.");
+			throw new IllegalArgumentException(ERROR_MESSAGE + BLANK_NAME_ERROR);
 		}
 	}
 
-	private static void isUnique(String[] carNames) {
+	private void isUnique(String[] carNames) {
 		ArrayList<String> names = new ArrayList<>(Arrays.asList(carNames));
 		HashSet<String> unique = new HashSet<>(names);
 		if (names.size() != unique.size()) {
-			throw new IllegalArgumentException(ERROR + "자동차 이름은 중복될 수 없습니다.");
+			throw new IllegalArgumentException(ERROR_MESSAGE + DUPLICATE_NAME_ERROR);
 		}
 	}
 
-	private static void isLong(String carName) {
+	private void tooLong(String carName) {
 		if (carName.length() > 5) {
-			throw new IllegalArgumentException(ERROR + "자동차 이름은 5자 이하여야 합니다.");
+			throw new IllegalArgumentException(ERROR_MESSAGE + LONG_NAME_ERROR);
 		}
 	}
 
-	private static void isShort(String carName) {
+	private void tooShort(String carName) {
 		if (carName.length() < 1) {
-			throw new IllegalArgumentException(ERROR + "자동차 이름은 1자 이상이여야 합니다.");
+			throw new IllegalArgumentException(ERROR_MESSAGE + SHORT_NAME_ERROR);
 		}
 	}
 
-	private static void hasBlank(String carName) {
+	private void hasBlank(String carName) {
 		if (carName.contains(" ")) {
-			throw new IllegalArgumentException(ERROR + "자동차 이름에 공백이 포함될 수 없습니다.");
+			throw new IllegalArgumentException(ERROR_MESSAGE + CONTAINS_BLANK_ERROR);
 		}
 	}
 
-	private static void notDigit(String round, int i) {
+	private void notDigit(String round, int i) {
 		if (!Character.isDigit(round.charAt(i))) {
-			throw new IllegalArgumentException(ERROR + "라운드 횟수는 숫자여야 합니다.");
+			throw new IllegalArgumentException(ERROR_MESSAGE + NOT_DIGIT_ERROR);
 		}
 	}
 
-	private static void lessThanOne(String round) {
+	private void lessThanOne(String round) {
 		if (Integer.parseInt(round) < 1) {
-			throw new IllegalArgumentException(ERROR + "라운드 횟수는 1 이상의 정수여야 합니다.");
+			throw new IllegalArgumentException(ERROR_MESSAGE + NOT_POSITIVE_ERROR);
 		}
 	}
 }

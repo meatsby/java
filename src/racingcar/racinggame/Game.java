@@ -3,23 +3,29 @@ package racingcar.racinggame;
 import java.util.ArrayList;
 
 import racingcar.Car;
-import racingcar.user.Input;
-import racingcar.user.Output;
 
 public class Game {
+	private final Input input;
+	private final Output output;
+	private final ArrayList<String> champion;
 	private int highScore;
-	private final ArrayList<String> champion = new ArrayList<>();
+
+	public Game() {
+		input = new Input();
+		output = new Output();
+		champion = new ArrayList<>();
+	}
 
 	public void start() {
-		String[] carNames = Input.inputCarNames();
+		String[] carNames = input.inputCarNames();
 		Car[] cars = createCars(carNames);
 
-		String round = Input.inputRound();
-		Output.startRound(round, cars);
+		String round = input.inputRound();
+		output.printRoundResult(round, cars);
 
 		getHighScore(cars);
 		getChampion(cars);
-		Output.printChampionList(champion);
+		output.printChampionList(champion);
 	}
 
 	private Car[] createCars(String[] carNames) {

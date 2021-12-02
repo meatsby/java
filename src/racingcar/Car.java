@@ -14,10 +14,8 @@ public class Car {
 		this.name = name;
 	}
 
-	// 추가 기능 구현
 	public void move() {
-		int randNum = Randoms.pickNumberInRange(MIN_POWER, MAX_POWER);
-		if (randNum >= THRESHOLD) {
+		if (Randoms.pickNumberInRange(MIN_POWER, MAX_POWER) >= THRESHOLD) {
 			position++;
 		}
 	}
