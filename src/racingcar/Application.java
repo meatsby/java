@@ -1,9 +1,11 @@
 package racingcar;
 
-public class Application {
+import racingcar.racinggame.Game;
 
-    public static void main(String[] args) {
-        Game game = new Game();
-        game.start();
-    }
+public class Application {
+	public static void main(String[] args) {
+		// TODO 구현 진행
+		Game game = new Game();
+		game.start();
+	}
 }

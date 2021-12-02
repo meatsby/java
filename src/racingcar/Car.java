@@ -1,28 +1,32 @@
 package racingcar;
 
-import java.util.Random;
+import camp.nextstep.edu.missionutils.Randoms;
 
 public class Car {
-    private final String name;
-    private int position = 0;
-    private static final Random random = new Random();
+	private static final int MIN_POWER = 0;
+	private static final int MAX_POWER = 9;
+	private static final int THRESHOLD = 4;
 
-    public Car(String name) {
-        this.name = name;
-    }
+	private final String name;
+	private int position = 0;
 
-    // 추가 기능 구현
-    public void move() {
-        if (random.nextInt(10) > 3) {
-            position++;
-        }
-    }
+	public Car(String name) {
+		this.name = name;
+	}
 
-    public String getName() {
-        return name;
-    }
+	// 추가 기능 구현
+	public void move() {
+		int randNum = Randoms.pickNumberInRange(MIN_POWER, MAX_POWER);
+		if (randNum >= THRESHOLD) {
+			position++;
+		}
+	}
 
-    public int getPosition() {
-        return position;
-    }
+	public String getName() {
+		return name;
+	}
+
+	public int getPosition() {
+		return position;
+	}
 }
