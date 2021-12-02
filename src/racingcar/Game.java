@@ -1,9 +1,7 @@
 package racingcar;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import camp.nextstep.edu.missionutils.Console;
+import java.util.Scanner;
 
 public class Game {
 
@@ -11,13 +9,14 @@ public class Game {
 	private int numOfCars;
 	private Car[] cars;
 	private String round;
+	private static final Scanner scanner = new Scanner(System.in);
 
 	public void start() {
 		while (true) {
 			System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
 
 			try {
-				carNames = Console.readLine().split(",");
+				carNames = scanner.nextLine().split(",");
 				isValid(carNames);
 				numOfCars = carNames.length;
 
@@ -38,7 +37,7 @@ public class Game {
 			System.out.println("시도할 횟수는 몇회인가요?");
 
 			try {
-				round = Console.readLine();
+				round = scanner.nextLine();
 				isValid(round);
 				break;
 			} catch (IllegalArgumentException e) {
@@ -86,7 +85,7 @@ public class Game {
 
 	private void isValid(String[] carNames) {
 		for (String carName : carNames) {
-			if (carName.length() > 5) {
+			if (carName.length() > 5 | carName.length() < 1) {
 				throw new IllegalArgumentException();
 			}
 		}
