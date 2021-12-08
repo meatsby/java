@@ -143,15 +143,19 @@ public class Game {
 		for (Stage stage : stages) {
 			saved.add(stage.getStageName());
 			for (List<String> row : stage.getStageMap()) {
-				StringBuilder line = new StringBuilder();
-				for (String point : row) {
-					line.append(point);
-				}
-				saved.add(line.toString());
+				saved.add(getLine(row));
 			}
 			saved.add("=====");
 		}
 		return saved;
+	}
+
+	private String getLine(List<String> row) {
+		StringBuilder line = new StringBuilder();
+		for (String point : row) {
+			line.append(point);
+		}
+		return line.toString();
 	}
 
 	private String writeSavedFile(List<String> saved, String name) {
