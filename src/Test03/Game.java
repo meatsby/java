@@ -11,33 +11,37 @@ import java.util.Scanner;
 
 public class Game {
 
-	private List<Stage> init() throws IOException {
+	private List<Stage> init() {
 		String stageName = "";
 		List<List<String>> stageMap = new ArrayList<>();
 		List<Stage> stages = new ArrayList<>();
-		BufferedReader br = new BufferedReader(new FileReader(DIRECTORY));
-		String line;
-		while ((line = br.readLine()) != null) {
-			if (line.contains(STAGE_INDICATOR)) {
-				stageName = line;
-				stageMap = new ArrayList<>();
-				continue;
+
+		try (BufferedReader br = new BufferedReader(new FileReader(DIRECTORY))) {
+			String line;
+			while ((line = br.readLine()) != null) {
+				if (line.contains(STAGE_INDICATOR)) {
+					stageName = line;
+					stageMap = new ArrayList<>();
+					continue;
+				}
+				if (line.contains(END_INDICATOR)) {
+					Stage map = new Stage(stageName, stageMap);
+					stages.add(map);
+					continue;
+				}
+				List<String> row = new ArrayList<>();
+				for (int i = 0; i < line.length(); i++) {
+					row.add(Character.toString(line.charAt(i)));
+				}
+				stageMap.add(row);
 			}
-			if (line.contains(END_INDICATOR)) {
-				Stage map = new Stage(stageName, stageMap);
-				stages.add(map);
-				continue;
-			}
-			List<String> row = new ArrayList<>();
-			for (int i = 0; i < line.length(); i++) {
-				row.add(Character.toString(line.charAt(i)));
-			}
-			stageMap.add(row);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		return stages;
 	}
 
-	public void play() throws IOException {
+	public void play() {
 		List<Stage> stages = init();
 
 		System.out.println(START_MESSAGE);
@@ -53,7 +57,7 @@ public class Game {
 		System.out.println(CONGRATS_MESSAGE);
 	}
 
-	private void runStage(List<Stage> stages, int i) throws IOException {
+	private void runStage(List<Stage> stages, int i) {
 		Scanner sc = new Scanner(System.in);
 		Stage stage = stages.get(i);
 		Player player = stage.player;

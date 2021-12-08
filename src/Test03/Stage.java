@@ -48,6 +48,12 @@ public class Stage {
 		return false;
 	}
 
+	private void movePlayer(int[] oldLocation, int[] newLocation) {
+		stageMap.get(oldLocation[X]).set(oldLocation[Y], BLANK);
+		player.move(newLocation[X], newLocation[Y]);
+		stageMap.get(newLocation[X]).set(newLocation[Y], PLAYER);
+	}
+
 	private void moveWithBall(String cmd, int[] oldLocation, int[] newLocation) {
 		int[] movedBall = moves(cmd, newLocation);
 		if (inRange(movedBall)) {
@@ -79,23 +85,17 @@ public class Stage {
 		return stageMap.get(coordinate[X]).get(coordinate[Y]);
 	}
 
-	private void movePlayer(int[] oldLocation, int[] newLocation) {
-		stageMap.get(oldLocation[X]).set(oldLocation[Y], BLANK);
-		player.move(newLocation[X], newLocation[Y]);
-		stageMap.get(newLocation[X]).set(newLocation[Y], PLAYER);
+	private void moveBall(int[] movedBall) {
+		stageMap.get(movedBall[X]).set(movedBall[Y], BALL);
 	}
 
-	private void moveBall(int[] movedRock) {
-		stageMap.get(movedRock[X]).set(movedRock[Y], BALL);
+	private void goalBall(int[] movedBall) {
+		stageMap.get(movedBall[X]).set(movedBall[Y], COMPLETE);
 	}
 
-	private void goalBall(int[] movedRock) {
-		stageMap.get(movedRock[X]).set(movedRock[Y], COMPLETE);
-	}
-
-	private void separate(int[] newLocation, int[] movedRock) {
+	private void separate(int[] newLocation, int[] movedBall) {
 		stageMap.get(newLocation[X]).set(newLocation[Y], HALL);
-		stageMap.get(movedRock[X]).set(movedRock[Y], BALL);
+		stageMap.get(movedBall[X]).set(movedBall[Y], BALL);
 	}
 
 	private int[] moves(String cmd, int[] coordinate) {
