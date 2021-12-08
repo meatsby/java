@@ -19,10 +19,14 @@ public class Stage {
 		this.width = stageMap.get(0).size();
 
 		for (int i = 0; i < stageMap.size(); i++) {
-			for (int j = 0; j < stageMap.get(i).size(); j++) {
-				if (stageMap.get(i).get(j).equals(PLAYER)) {
-					this.player = new Player(i, j);
-				}
+			findPlayer(i);
+		}
+	}
+
+	private void findPlayer(int i) {
+		for (int j = 0; j < stageMap.get(i).size(); j++) {
+			if (stageMap.get(i).get(j).equals(PLAYER)) {
+				this.player = new Player(i, j);
 			}
 		}
 	}
@@ -118,10 +122,8 @@ public class Stage {
 
 	private boolean clear() {
 		for (List<String> strings : stageMap) {
-			for (String string : strings) {
-				if (string.equals(HALL)) {
-					return false;
-				}
+			if (strings.contains(HALL)) {
+				return false;
 			}
 		}
 		return true;

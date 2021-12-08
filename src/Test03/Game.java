@@ -10,35 +10,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Game {
-
-	private List<Stage> init() {
-		String stageName = "";
-		List<List<String>> stageMap = new ArrayList<>();
-		List<Stage> stages = new ArrayList<>();
-
-		try (BufferedReader br = new BufferedReader(new FileReader(DIRECTORY))) {
-			String line;
-			while ((line = br.readLine()) != null) {
-				if (line.contains(STAGE_INDICATOR)) {
-					stageName = line;
-					stageMap = new ArrayList<>();
-					continue;
-				}
-				if (line.contains(END_INDICATOR)) {
-					Stage map = new Stage(stageName, stageMap);
-					stages.add(map);
-					continue;
-				}
-				List<String> row = new ArrayList<>();
-				for (int i = 0; i < line.length(); i++) {
-					row.add(Character.toString(line.charAt(i)));
-				}
-				stageMap.add(row);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return stages;
+	private final Scanner sc;
+	
+	public Game(Scanner sc) {
+		this.sc = sc;
 	}
 
 	public void play() {
@@ -57,12 +32,51 @@ public class Game {
 		System.out.println(CONGRATS_MESSAGE);
 	}
 
+	private List<Stage> init() {
+		String stageName = "";
+		List<List<String>> stageMap = new ArrayList<>();
+		List<Stage> stages = new ArrayList<>();
+		for (String line : readFile()) {
+			if (line.contains(STAGE_INDICATOR)) {
+				stageName = line;
+				stageMap = new ArrayList<>();
+				continue;
+			}
+			if (line.contains(END_INDICATOR)) {
+				Stage map = new Stage(stageName, stageMap);
+				stages.add(map);
+				continue;
+			}
+			stageMap.add(createRow(line));
+		}
+		return stages;
+	}
+
+	private List<String> readFile() {
+		List<String> file = new ArrayList<>();
+		try (BufferedReader br = new BufferedReader(new FileReader(DIRECTORY))) {
+			String line;
+			while ((line = br.readLine()) != null) {
+				file.add(line);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return file;
+	}
+
+	private List<String> createRow(String line) {
+		List<String> row = new ArrayList<>();
+		for (int i = 0; i < line.length(); i++) {
+			row.add(Character.toString(line.charAt(i)));
+		}
+		return row;
+	}
+
 	private void runStage(List<Stage> stages, int i) {
-		Scanner sc = new Scanner(System.in);
 		Stage stage = stages.get(i);
 		Player player = stage.player;
 		int count = CLEAR_COUNT;
-
 		while (true) {
 			stage.printMap();
 			System.out.print(SOKOBAN_PROMPT);
@@ -73,7 +87,6 @@ public class Game {
 			}
 			count++;
 			boolean result = stage.move(cmd, player.location());
-
 			if (result) {
 				System.out.println(CLEAR_COUNT_MESSAGE + count);
 				break;
