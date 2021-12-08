@@ -4,6 +4,13 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Sokoban02 {
+	private static final String STAGE_NAME = "Stage 2";
+	private static final String SOKOBAN_PROMPT = "SOKOBAN> ";
+	private static final String QUIT_CMD = "q";
+	private static final String END_MESSAGE = "Bye~";
+	private static final String MOVE_MESSAGE = "%s: %s으로 이동합니다.%n";
+	private static final String ERROR_MESSAGE = "%s: (경고!) 해당 명령을 수행할 수 없습니다!%n";
+
 	private final Scanner sc;
 	private final Map02 map;
 	private int[] playerCo = {3, 5};
@@ -30,14 +37,14 @@ public class Sokoban02 {
 	}
 
 	public void play() {
-		System.out.println("Stage 2");
+		System.out.println(STAGE_NAME);
 		map.print();
 		while (true) {
-			System.out.print("SOKOBAN> ");
+			System.out.print(SOKOBAN_PROMPT);
 			String input = sc.nextLine();
 
-			if (input.equals("q")) {
-				System.out.println("Bye~");
+			if (input.equals(QUIT_CMD)) {
+				System.out.println(END_MESSAGE);
 				break;
 			}
 
@@ -55,7 +62,7 @@ public class Sokoban02 {
 				ny = playerCo[1] + move.get(cmd)[1];
 			} catch (NullPointerException e) {
 				map.print();
-				System.out.println(cmd.toUpperCase() + ": (경고!) 해당 명령을 수행할 수 없습니다!");
+				System.out.printf(ERROR_MESSAGE, cmd.toUpperCase());
 				continue;
 			}
 
@@ -63,10 +70,10 @@ public class Sokoban02 {
 				map.move(playerCo[0], playerCo[1], nx, ny);
 				playerCo = new int[] {nx, ny};
 				map.print();
-				System.out.println(cmd.toUpperCase() + ": " + message.get(cmd) + "으로 이동합니다.");
+				System.out.printf(MOVE_MESSAGE, cmd.toUpperCase(), message.get(cmd));
 			} else {
 				map.print();
-				System.out.println(cmd.toUpperCase() + ": (경고!) 해당 명령을 수행할 수 없습니다!");
+				System.out.printf(ERROR_MESSAGE, cmd.toUpperCase());
 			}
 		}
 	}
