@@ -2,6 +2,7 @@ package Test03;
 
 import static Test03.Constants.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Stage {
@@ -144,5 +145,21 @@ public class Stage {
 			sb.append("\n");
 		}
 		System.out.println(sb);
+	}
+
+	public List<String> saveMap() {
+		List<String> saved = new ArrayList<>();
+		for (List<String> row : stageMap) {
+			StringBuilder line = new StringBuilder();
+			for (String point : row) {
+				line.append(point);
+			}
+			saved.add(line.toString());
+		}
+		return saved;
+	}
+
+	public String getStageName() {
+		return stageName;
 	}
 }

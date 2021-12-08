@@ -2,13 +2,20 @@ package Test03;
 
 public class Constants {
 	public static final String DIRECTORY = "C:\\Users\\admin\\IdeaProjects\\Java\\src\\Test03\\map.txt";
+	public static final String SAVE_DIRECTORY = "C:\\Users\\admin\\IdeaProjects\\Java\\src\\Test03\\";
+	public static final String FILE_TYPE = ".txt";
 	public static final String STAGE_INDICATOR = "Stage";
 	public static final String END_INDICATOR = "=";
 	public static final String START_MESSAGE = "소코반의 세계에 오신 것을 환영합니다!";
 	public static final String START_EMOJI = "^오^";
 	public static final String SOKOBAN_PROMPT = "SOKOBAN> ";
 	public static final String RESET_CMD = "r";
+	public static final String PREV_CMD = "u";
+	public static final String ORIG_CMD = "U";
+	public static final String PREV = "prev";
+	public static final String ORIG = "orig";
 	public static final int CLEAR_COUNT = 0;
+	public static final int CURRENT_STAGE = 0;
 	public static final String CLEAR_COUNT_MESSAGE = "턴수: ";
 	public static final String CLEAR_MESSAGE = "전체 게임을 클리어하셨습니다!";
 	public static final String CONGRATS_MESSAGE = "축하드립니다!";
