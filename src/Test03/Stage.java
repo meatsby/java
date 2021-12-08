@@ -162,4 +162,8 @@ public class Stage {
 	public String getStageName() {
 		return stageName;
 	}
+
+	public List<List<String>> getStageMap() {
+		return stageMap;
+	}
 }
