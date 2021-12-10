@@ -1,30 +1,27 @@
-package baseball;
-
-import static baseball.Materials.DIGIT;
-import static baseball.Materials.userNum;
+package precourse.baseball;
 
 public class Validation {
 
     public void isValidInput() {
-        if (userNum.length() != DIGIT) {
+        if (Materials.userNum.length() != Materials.DIGIT) {
             throw new IllegalArgumentException();
         }
 
-        for (int i = 0; i < DIGIT; i++) {
+        for (int i = 0; i < Materials.DIGIT; i++) {
             inRange(i);
             noOverlap(i);
         }
     }
 
     private void inRange(int i) {
-        if (userNum.charAt(i) < '1' || userNum.charAt(i) > '9') {
+        if (Materials.userNum.charAt(i) < '1' || Materials.userNum.charAt(i) > '9') {
             throw new IllegalArgumentException();
         }
     }
 
     private void noOverlap(int i) {
-        for (int j = i + 1; j < DIGIT; j++) {
-            if (userNum.charAt(i) == userNum.charAt(j)) {
+        for (int j = i + 1; j < Materials.DIGIT; j++) {
+            if (Materials.userNum.charAt(i) == Materials.userNum.charAt(j)) {
                 throw new IllegalArgumentException();
             }
         }

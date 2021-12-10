@@ -1,10 +1,10 @@
-// package racingcar.controller;
+// package precourse.racingcar.controller;
 //
 // import java.util.ArrayList;
 //
-// import racingcar.model.Car;
-// import racingcar.view.InputView;
-// import racingcar.view.OutputView;
+// import precourse.racingcar.model.Car;
+// import precourse.racingcar.view.InputView;
+// import precourse.racingcar.view.OutputView;
 //
 // public class GameController {
 // 	private final InputView input;

@@ -1,11 +1,4 @@
-package baseball;
-
-import static baseball.Materials.ANSWER;
-import static baseball.Materials.CLEAR_MESSAGE;
-import static baseball.Materials.INPUT_MESSAGE;
-import static baseball.Materials.RESTART_MESSAGE;
-import static baseball.Materials.randNum;
-import static baseball.Materials.userNum;
+package precourse.baseball;
 
 import java.util.Scanner;
 
@@ -31,23 +24,23 @@ public class Game {
    }
 
    private void startRound() {
-       randNum = computer.makeRandNum();
+       Materials.randNum = computer.makeRandNum();
 
        while (true) {
-           System.out.print(INPUT_MESSAGE);
-           userNum = scanner.nextLine();
+           System.out.print(Materials.INPUT_MESSAGE);
+           Materials.userNum = scanner.nextLine();
            validation.isValidInput();
            String result = computer.compareNumbs();
            System.out.println(result);
-           if (result.equals(ANSWER)) {
-               System.out.println(CLEAR_MESSAGE);
+           if (result.equals(Materials.ANSWER)) {
+               System.out.println(Materials.CLEAR_MESSAGE);
                return;
            }
        }
    }
 
    private boolean restart() {
-       System.out.println(RESTART_MESSAGE);
+       System.out.println(Materials.RESTART_MESSAGE);
        String input = scanner.nextLine();
 
        if (input.equals("1")) {

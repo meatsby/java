@@ -1,4 +1,4 @@
-package baseball;
+package precourse.baseball;
 
 public final class Materials {
 

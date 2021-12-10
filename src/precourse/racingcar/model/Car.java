@@ -1,4 +1,4 @@
-// package racingcar.model;
+// package precourse.racingcar.model;
 //
 // import java.util.ArrayList;
 //

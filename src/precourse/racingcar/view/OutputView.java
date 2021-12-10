@@ -1,8 +1,8 @@
-// package racingcar.view;
+// package precourse.racingcar.view;
 //
 // import java.util.ArrayList;
 //
-// import racingcar.model.Car;
+// import precourse.racingcar.model.Car;
 //
 // public class OutputView {
 // 	private static final String COLON = " : ";
