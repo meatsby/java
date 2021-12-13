@@ -1,6 +1,8 @@
 package precourse.vendingmachine.domain;
 
 public class Item {
+	private static final int EMPTY = 0;
+
 	private final String name;
 	private final int price;
 	private int quantity;
@@ -11,19 +13,23 @@ public class Item {
 		this.quantity = Integer.parseInt(quantity);
 	}
 
+	public boolean exists() {
+		return quantity != EMPTY;
+	}
+
+	public boolean is(String itemName) {
+		return name.equals(itemName);
+	}
+
+	public void reduceQuantity() {
+		quantity--;
+	}
+
 	public String getName() {
 		return name;
 	}
 
 	public int getPrice() {
 		return price;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void reduceQuantity() {
-		quantity--;
 	}
 }

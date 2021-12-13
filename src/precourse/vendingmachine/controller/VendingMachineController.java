@@ -1,14 +1,14 @@
 package precourse.vendingmachine.controller;
 
-import precourse.vendingmachine.view.InputView;
-import precourse.vendingmachine.view.OutputView;
-import precourse.vendingmachine.domain.VendingMachine;
+import vendingmachine.domain.VendingMachine;
+import vendingmachine.view.InputView;
+import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
 	public void run() {
 		VendingMachine vendingMachine = new VendingMachine();
 
-		initializeChanges(vendingMachine);
+		initializeCoins(vendingMachine);
 		OutputView.showCoins(vendingMachine);
 		initializeItems(vendingMachine);
 		initializeBalance(vendingMachine);
@@ -18,16 +18,16 @@ public class VendingMachineController {
 			executePurchase(vendingMachine);
 		}
 		OutputView.showBalance(vendingMachine);
-		OutputView.showChange(vendingMachine);
+		OutputView.showChanges(vendingMachine);
 	}
 
-	private void initializeChanges(VendingMachine vendingMachine) {
-		String changeBalance = InputView.setChanges();
+	private void initializeCoins(VendingMachine vendingMachine) {
+		String coinBalance = InputView.setCoins();
 		try {
-			vendingMachine.initializeChanges(changeBalance);
+			vendingMachine.initializeCoins(coinBalance);
 		} catch (IllegalArgumentException e) {
 			OutputView.showError(e.getMessage());
-			initializeChanges(vendingMachine);
+			initializeCoins(vendingMachine);
 		}
 	}
 

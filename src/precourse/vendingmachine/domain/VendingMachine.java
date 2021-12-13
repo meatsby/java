@@ -3,65 +3,67 @@ package precourse.vendingmachine.domain;
 import java.util.List;
 import java.util.Map;
 
-import precourse.vendingmachine.Validation;
+import vendingmachine.util.BalanceValidator;
+import vendingmachine.util.ItemValidator;
+import vendingmachine.util.PurchaseValidator;
 
 public class VendingMachine {
 	private static final int NAME = 0;
 	private static final int PRICE = 1;
 	private static final int QUANTITY = 2;
 
-	private Coins changes;
+	private Coins coins;
 	private Items items;
 	private Balance balance;
 
-	public void initializeChanges(String input) {
-		int changeBalance = Validation.isValid(input);
-		this.changes = new Coins(changeBalance);
-		changes.createRandomChanges();
+	public void initializeCoins(String input) {
+		int coinBalance = BalanceValidator.isValidBalance(input);
+		this.coins = new Coins(coinBalance);
+		coins.createRandomCoins();
 	}
 
 	public void initializeItems(String input) {
 		this.items = new Items();
-		List<String> itemsInfo = Validation.isValidItems(input);
+		List<String> itemsInfo = ItemValidator.isValidItems(input);
 		for (String itemInfo : itemsInfo) {
-			List<String> detail = Validation.isValidItem(itemInfo);
+			List<String> detail = ItemValidator.isValidItem(itemInfo);
 			items.add(new Item(detail.get(NAME), detail.get(PRICE), detail.get(QUANTITY)));
 		}
 	}
 
 	public void initializeBalance(String input) {
-		int balance = Validation.isValid(input);
+		int balance = BalanceValidator.isValidBalance(input);
+		BalanceValidator.isEnoughBalance(balance, items);
 		this.balance = new Balance(balance);
 	}
 
 	public boolean isAvailable() {
-		return balance.getBalance() >= items.getCheapest() && !items.soldOut();
+		return balance.canBuy(items.getExistingCheapest());
 	}
 
 	public void executePurchase(String itemName) {
-		Validation.isValidPurchase(itemName, items);
+		PurchaseValidator.isValidPurchase(itemName, items, balance);
 		for (Item item : items.getItemList()) {
 			returnItem(item, itemName);
 		}
 	}
 
 	private void returnItem(Item item, String itemName) {
-		if (item.getName().equals(itemName) && item.getQuantity() != 0) {
+		if (item.is(itemName) && item.exists()) {
 			item.reduceQuantity();
 			balance.reduceBalance(item.getPrice());
 		}
 	}
 
-	public Map<Coin, Integer> getChanges() {
-		return changes.getChangeCoins();
+	public Map<Coin, Integer> getCoins() {
+		return coins.getCoins();
 	}
 
 	public Map<Coin, Integer> getChangeable() {
-		return changes.getChangeableCoins(balance);
+		return coins.getChangeableCoins(balance);
 	}
 
 	public int getBalance() {
 		return balance.getBalance();
 	}
-
 }

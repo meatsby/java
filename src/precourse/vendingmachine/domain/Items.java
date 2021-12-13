@@ -5,41 +5,42 @@ import java.util.Collections;
 import java.util.List;
 
 public class Items {
-	private static final int EMPTY = 0;
+	private static final int INF = (int)2e9;
 
 	private final List<Item> itemList = new ArrayList<>();
+	private final List<String> nameList = new ArrayList<>();
 
 	public void add(Item item) {
 		itemList.add(item);
+		nameList.add(item.getName());
 	}
 
-	public int getCheapest() {
-		List<Integer> priceList = new ArrayList<>();
+	public int getExistingCheapest() {
+		List<Integer> existingPriceList = new ArrayList<>(Collections.singletonList(INF));
 		for (Item item : itemList) {
-			priceList.add(item.getPrice());
+			if (item.exists()) {
+				existingPriceList.add(item.getPrice());
+			}
 		}
-		return Collections.min(priceList);
-	}
-
-	public boolean soldOut() {
-		int totalQuantity = 0;
-		for (Item item : itemList) {
-			totalQuantity += item.getQuantity();
-		}
-		return totalQuantity == EMPTY;
+		return Collections.min(existingPriceList);
 	}
 
 	public boolean noSuchItem(String itemName) {
-		List<String> nameList = new ArrayList<>();
-		for (Item item : itemList) {
-			nameList.add(item.getName());
-		}
 		return !nameList.contains(itemName);
 	}
 
 	public boolean notEnoughItem(String itemName) {
 		for (Item item : itemList) {
-			if (item.getName().equals(itemName) && item.getQuantity() == 0) {
+			if (item.is(itemName) && !item.exists()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean notEnoughBalance(String itemName, Balance balance) {
+		for (Item item : itemList) {
+			if (item.is(itemName) && !balance.canBuy(item.getPrice())) {
 				return true;
 			}
 		}
@@ -47,6 +48,6 @@ public class Items {
 	}
 
 	public List<Item> getItemList() {
-		return itemList;
+		return Collections.unmodifiableList(itemList);
 	}
 }

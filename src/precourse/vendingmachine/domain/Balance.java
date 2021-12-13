@@ -7,11 +7,15 @@ public class Balance {
 		this.balance = balance;
 	}
 
-	public int getBalance() {
-		return balance;
-	}
-
 	public void reduceBalance(int price) {
 		balance -= price;
+	}
+
+	public boolean canBuy(int price) {
+		return balance >= price;
+	}
+
+	public int getBalance() {
+		return balance;
 	}
 }

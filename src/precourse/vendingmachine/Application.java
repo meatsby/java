@@ -1,6 +1,6 @@
 package precourse.vendingmachine;
 
-import precourse.vendingmachine.controller.VendingMachineController;
+import vendingmachine.controller.VendingMachineController;
 
 public class Application {
 	public static void main(String[] args) {

@@ -2,22 +2,33 @@ package precourse.vendingmachine.view;
 
 import java.util.Map;
 
-import precourse.vendingmachine.domain.Coin;
-import precourse.vendingmachine.domain.VendingMachine;
+import vendingmachine.domain.Coin;
+import vendingmachine.domain.VendingMachine;
 
 public class OutputView {
-	private static final String CHANGE_ACQUIRED = "자판기가 보유한 동전";
+	private static final String COIN_ACQUIRED = "자판기가 보유한 동전";
 	private static final String COIN_LIST = "%s원 - %d개%n";
 	private static final String BALANCE_MESSAGE = "투입 금액: %d원%n";
 	private static final String CHANGE_MESSAGE = "잔돈";
 	private static final String NOTHING_TO_REFUND = "잔돈이 없습니다.";
-	private static final int NO_CHANGE = 0;
+
+	private static final int COIN_VALUE_INDEX = 5;
+	private static final int ZERO_WON = 0;
+
+	public static void showError(String error) {
+		System.out.println(error);
+		System.out.println();
+	}
 
 	public static void showCoins(VendingMachine vendingMachine) {
 		System.out.println();
-		System.out.println(CHANGE_ACQUIRED);
-		for (Map.Entry<Coin, Integer> change : vendingMachine.getChanges().entrySet()) {
-			System.out.printf(COIN_LIST, change.getKey().name().substring(5), change.getValue());
+		System.out.println(COIN_ACQUIRED);
+		showList(vendingMachine.getCoins());
+	}
+
+	private static void showList(Map<Coin, Integer> list) {
+		for (Map.Entry<Coin, Integer> coin : list.entrySet()) {
+			System.out.printf(COIN_LIST, coin.getKey().name().substring(COIN_VALUE_INDEX), coin.getValue());
 		}
 	}
 
@@ -26,19 +37,12 @@ public class OutputView {
 		System.out.printf(BALANCE_MESSAGE, vendingMachine.getBalance());
 	}
 
-	public static void showChange(VendingMachine vendingMachine) {
+	public static void showChanges(VendingMachine vendingMachine) {
 		System.out.println(CHANGE_MESSAGE);
-		if (vendingMachine.getBalance() == NO_CHANGE) {
+		if (vendingMachine.getBalance() == ZERO_WON) {
 			System.out.println(NOTHING_TO_REFUND);
 			return;
 		}
-		for (Map.Entry<Coin, Integer> change : vendingMachine.getChangeable().entrySet()) {
-			System.out.printf(COIN_LIST, change.getKey().name().substring(5), change.getValue());
-		}
-	}
-
-	public static void showError(String error) {
-		System.out.println(error);
-		System.out.println();
+		showList(vendingMachine.getChangeable());
 	}
 }
