@@ -20,6 +20,8 @@ public class ArrayListEx1 {
 		Collections.sort(list2);
 		print(list1, list2);
 
+		System.out.println("list1.containsAll(list2):" + list1.containsAll(list2));
+
 		list2.add("B");
 		list2.add("C");
 		list2.add(3, "A");
