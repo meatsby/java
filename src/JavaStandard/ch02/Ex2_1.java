@@ -1,4 +1,4 @@
-package JavaStandard.ch01;
+package JavaStandard.ch02;
 
 public class Ex2_1 {
 	public static void main(String[] args) {
