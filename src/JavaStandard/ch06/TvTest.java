@@ -1,4 +1,4 @@
-package JavaStandard.ch6;
+package JavaStandard.ch06;
 
 class Tv {
     String color;

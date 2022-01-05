@@ -1,4 +1,4 @@
-package JavaStandard.ch6;
+package JavaStandard.ch06;
 
 public class CardTest {
     public static void main(String[] args) {

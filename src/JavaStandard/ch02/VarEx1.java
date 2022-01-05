@@ -1,4 +1,4 @@
-package JavaStandard.ch2;
+package JavaStandard.ch02;
 
 public class VarEx1 {
     public static void main(String[] args) {
