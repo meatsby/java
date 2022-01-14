@@ -33,6 +33,6 @@ public class Ex5_9 {
 		}
 
 		System.out.println("==============================");
-		System.out.printf("총점:%5d%5d%5d", korTotal, engTotal, mathTotal);
+		System.out.printf("총점: %d%5d%5d", korTotal, engTotal, mathTotal);
 	}
 }
