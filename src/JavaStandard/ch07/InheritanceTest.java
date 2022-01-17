@@ -23,5 +23,9 @@ public class InheritanceTest {
 		System.out.println("c.p.x=" + c.p.x);
 		System.out.println("c.p.y=" + c.p.y);
 		System.out.println("c.r=" + c.r);
+		System.out.println(c);
+		System.out.println(c.toString());
+		Circle c2 = new Circle();
+		System.out.println(c2.toString());
 	}
 }
