@@ -19,4 +19,10 @@ public class Ex7_12 {
 			final static int CONST = 300; // 상수는 허용
 		}
 	}
+
+	public static void main(String[] args) {
+		System.out.println(InstanceInner.CONST);
+		System.out.println(StaticInner.cv);
+		// System.out.println(LocalInner.CONST); // 에러. 메서드 내에서만 가능
+	}
 }
