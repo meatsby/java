@@ -17,6 +17,7 @@ interface Testable {
 }
 
 public class Ex12_7 {
+	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
 		Child c = new Child();
 
