@@ -30,9 +30,18 @@ public class StreamTest {
 		// System.out.println("sum = " + intStream.sum());
 		// System.out.println("average = " + intStream.average());
 
-		IntStream intStream = new Random().ints(10, 5, 10);
-		intStream
-			// .limit(10)
-			.forEach(System.out::println);
+		// IntStream intStream = new Random().ints(10, 5, 10);
+		// intStream
+		// 	// .limit(10)
+		// 	.forEach(System.out::println);
+
+		Stream<Integer> evenStream = Stream.iterate(0, n -> n+2);
+		evenStream.limit(10).forEach(System.out::println);
+
+		Stream<Double> randomStream = Stream.generate(Math::random);
+		randomStream.limit(10).forEach(System.out::println);
+
+		Stream<Integer> oneStream = Stream.generate(() -> 1);
+		oneStream.limit(10).forEach(System.out::println);
 	}
 }
