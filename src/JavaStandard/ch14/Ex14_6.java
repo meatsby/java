@@ -23,7 +23,9 @@ public class Ex14_6 {
 
 		fileStream.map(File::getName)                // Stream<File> -> Stream<String>
 			.filter(s -> s.indexOf('.') != -1)         // 확장자가 없는 것은 제외
+			.peek(s -> System.out.printf("filename=%s%n", s)) // 파일명 출력
 			.map(s -> s.substring(s.indexOf('.') + 1)) // Stream<String> -> Stream<String>
+			.peek(s -> System.out.printf("extension=%s%n", s)) // 확장자 출력
 			.map(String::toUpperCase)                  // Stream<String> -> Stream<String>
 			.distinct()                                // 중복 제거
 			.forEach(System.out::print);               // JAVABAKTXT
