@@ -1,24 +1,37 @@
 package JavaStandard.ch14;
 
+import java.util.function.Function;
+import java.util.function.Supplier;
+
 public class Ex14_0 {
 	public static void main(String[] args) {
-		// Object obj = (a, b) -> a > b ? a : b; // 람다식. 익명객체
-		// MyFunction f = new MyFunction() {
-		// 	public int max(int a, int b) {
-		// 		return a > b ? a : b;
-		// 	}
-		// };
+		// Supplier<MyClass> s = () -> new MyClass();
+		// Supplier<MyClass> s = MyClass::new;
 
-		// 람다식을 다루기 위한 참조변수의 타입은 함수형 인터페이스로 한다.
-		MyFunction f = (a, b) -> a > b ? a : b; // 람다식. 익명객체
+		// MyClass mc = s.get();
+		// System.out.println(mc);
+		// System.out.println(s.get());
 
-		int value = f.max(3, 5); // 함수형 인터페이스
-		System.out.println("value = " + value);
+		// Function<Integer, MyClass> f = (i) -> new MyClass(i);
+		Function<Integer, MyClass> f = MyClass::new;
+
+		MyClass mc = f.apply(100);
+		System.out.println(mc.iv);
+		System.out.println(f.apply(100).iv);
+
+		// Function<Integer, int[]> f2 = (i) -> new int[i];
+		Function<Integer, int[]> f2 = int[]::new;
+
+		int[] arr = f2.apply(100);
+		System.out.println(arr.length);
+		System.out.println(f2.apply(100).length);
 	}
 }
 
-@FunctionalInterface
-interface MyFunction {
-	// public abstract int max(int a, int b);
-	int max(int a, int b);
+class MyClass {
+	int iv;
+
+	MyClass(int iv) {
+		this.iv = iv;
+	}
 }
