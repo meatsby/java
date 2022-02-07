@@ -2,6 +2,7 @@ package JavaStandard.ch14;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -18,15 +19,20 @@ public class StreamTest {
 		// System.out.println();
 
 		// Stream<String> strStream = Stream.of("a", "b", "c");
-		Stream<String> strStream = Arrays.stream(new String[] {"a", "b", "c"});
-		strStream.forEach(System.out::println);
+		// Stream<String> strStream = Arrays.stream(new String[] {"a", "b", "c"});
+		// strStream.forEach(System.out::println);
 
-		int[] intArr = {1, 2, 3, 4, 5};
+		// int[] intArr = {1, 2, 3, 4, 5};
 		// Stream<Integer> intStream = Arrays.stream(intArr);
-		IntStream intStream = Arrays.stream(intArr);
+		// IntStream intStream = Arrays.stream(intArr);
 		// intStream.forEach(System.out::println);
 		// System.out.println("count = " + intStream.count());
 		// System.out.println("sum = " + intStream.sum());
-		System.out.println("average = " + intStream.average());
+		// System.out.println("average = " + intStream.average());
+
+		IntStream intStream = new Random().ints(10, 5, 10);
+		intStream
+			// .limit(10)
+			.forEach(System.out::println);
 	}
 }
