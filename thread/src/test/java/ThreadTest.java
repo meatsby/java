@@ -7,6 +7,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 
 public class ThreadTest {
@@ -37,6 +38,27 @@ public class ThreadTest {
             assertThat(executor.getPoolSize()).isEqualTo(2);
             assertThat(executor.getQueue().size()).isEqualTo(1);
         });
+    }
+
+    @Test
+    void newCachedThreadPoolTest() {
+        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newCachedThreadPool();
+        executor.submit(sleepThread());
+        executor.submit(sleepThread());
+        executor.submit(sleepThread());
+
+        assertAll(() -> {
+            assertThat(executor.getPoolSize()).isEqualTo(3);
+            assertThat(executor.getQueue().size()).isEqualTo(0);
+        });
+    }
+
+    @Test
+    void newSingleThreadExecutorTest() {
+        AtomicInteger counter = new AtomicInteger();
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.submit(() -> counter.set(1));
+        executor.submit(() -> counter.compareAndSet(1, 2));
     }
 
     private Runnable sleepThread() {
