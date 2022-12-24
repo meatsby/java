@@ -1,7 +1,6 @@
 package JavaStandard.ch14;
 
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class Ex14_0 {
 	public static void main(String[] args) {
